@@ -9,7 +9,8 @@ RSpec.describe "init test" do
   it 'process_input' do
     response = @simple_api.process_input
     expect(response.size).not_to be(0)
-    counter = response.count { |c| c[:property_id] && c[:process_id] }
+    # counter = response.count { |c| c[:property_id] && c[:process_id] }
+    counter = response.count { |c| c[:property_id] && c[:production_version] }
     expect(counter).to be(response.size)
   end
 
@@ -17,7 +18,7 @@ RSpec.describe "init test" do
     response = @simple_api.process_input
     urls     = @simple_api.make_urls(response)
     expect(urls.size).not_to be(0)
-    counter = response.count do |url|
+    counter = urls.count do |url|
       !url.match('#property_id#') && !url.match('#product_id#')
     end
     expect(counter).to be(urls.size)
